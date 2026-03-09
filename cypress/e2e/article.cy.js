@@ -35,22 +35,26 @@ describe('Article flow', () => {
   });
 
   describe('Delete article', () => {
+    const deleteArticleTitle = `Delete Article ${Date.now()}`;
+    const deleteArticleDescription = 'Article for deletion';
+    const deleteArticleBody = 'Body of article to delete';
+
     beforeEach(() => {
       cy.createArticle({
-        title: articleTitle,
-        description: articleDescription,
-        body: articleBody,
+        title: deleteArticleTitle,
+        description: deleteArticleDescription,
+        body: deleteArticleBody,
       });
     });
 
     it('should delete the article', () => {
-      cy.contains(articleTitle).click();
+      cy.contains(deleteArticleTitle).click();
 
       cy.contains('button', 'Delete Article').click();
 
       cy.contains('Global Feed').click();
 
-      cy.contains(articleTitle).should('not.exist');
+      cy.contains(deleteArticleTitle).should('not.exist');
     });
   });
 });
