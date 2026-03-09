@@ -35,11 +35,15 @@ describe('Article flow', () => {
   });
 
   describe('Delete article', () => {
-    const deleteArticleTitle = `Delete Article ${Date.now()}`;
-    const deleteArticleDescription = 'Article for deletion';
-    const deleteArticleBody = 'Body of article to delete';
+    let deleteArticleTitle;
+    let deleteArticleDescription;
+    let deleteArticleBody;
 
     beforeEach(() => {
+      deleteArticleTitle = `Delete Article ${Date.now()}`;
+      deleteArticleDescription = 'Article for deletion';
+      deleteArticleBody = 'Body of article to delete';
+
       cy.createArticle({
         title: deleteArticleTitle,
         description: deleteArticleDescription,
@@ -48,6 +52,8 @@ describe('Article flow', () => {
     });
 
     it('should delete the article', () => {
+      cy.visit('/');
+
       cy.contains(deleteArticleTitle).click();
 
       cy.contains('button', 'Delete Article').click();
